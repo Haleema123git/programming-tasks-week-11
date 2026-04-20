@@ -1,0 +1,60 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Function prototype
+float taxCalculator(char type, float price);
+
+int main() {
+    char vehicleType;
+    float vehiclePrice;
+    
+    cout << "Enter vehicle type (M/E/S/V/T): ";
+    cin >> vehicleType;
+    cout << "Enter vehicle price: $";
+    cin >> vehiclePrice;
+    
+    float finalPrice = taxCalculator(vehicleType, vehiclePrice);
+    
+    if (finalPrice > 0) {
+        cout << fixed << setprecision(2);
+        cout << "The final price of a vehicle of type " << vehicleType 
+             << " after adding the tax is $" << finalPrice << endl;
+    }
+    
+    return 0;
+}
+
+float taxCalculator(char type, float price) {
+    float taxRate;
+    switch (type) {
+        case 'M':
+        case 'm':
+            taxRate = 6.0;
+            break;
+        case 'E':
+        case 'e':
+            taxRate = 8.0;
+            break;
+        case 'S':
+        case 's':
+            taxRate = 10.0;
+            break;
+        case 'V':
+        case 'v':
+            taxRate = 12.0;
+            break;
+        case 'T':
+        case 't':
+            taxRate = 15.0;
+            break;
+        default:
+            cout << "Invalid vehicle type!" << endl;
+            return -1;
+    }
+    
+    float taxAmount = price * (taxRate / 100);
+    float finalPrice = price + taxAmount;
+    
+    return finalPrice;
+}
